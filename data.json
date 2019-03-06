@@ -1,0 +1,29 @@
+{
+    "Bmw":
+    {
+        "factory": "Bmv",
+        "model": "m1",
+        "modification": "Coupe",
+        "type_of_fuel": "gasoline",
+        "engine_capacity_cubic_cm": "2979",
+        "date_of_manufacture": "2011"
+    },
+    "Audi":
+    {
+        "factory": "Audi",
+        "model": "Audi TT",
+        "modification": "Sedan",
+        "type_of_fuel": "gasoline",
+        "engine_capacity_cubic_cm": "1800",
+        "date_of_manufacture": "2006"
+    },
+    "Volvo":
+    {
+        "factory": "Volvo",
+        "model": "S60",
+        "modification": "Sedan",
+        "type_of_fuel": "gasoline",
+        "engine_capacity_cubic_cm": "2000",
+        "date_of_manufacture": "2009"
+    }
+}

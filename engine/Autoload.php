@@ -38,9 +38,10 @@ class Autoload
     // }
 
     public function loadClass($className) { 
-        $fileName = str_replace(['app\\','\\'],['../', '/'], $className).".php";
+        //$fileName = str_replace(['app\\','\\'],['../', '/'], $className).".php";
+        $fileName = str_replace(['app\\','\\'],[DIR_ROOT . '/../', DS], $className).".php";
         //$fileName = str_replace(['app\\', '\\'], [DIR_ROOT . '/../', DS], $className) . ".php";
-        var_dump($className,$fileName);
+        //var_dump($className,$fileName);
         if(file_exists($fileName)) {
             include $fileName;
         }

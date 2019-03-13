@@ -34,6 +34,7 @@
 include "../engine/Autoload.php";
 use app\model\Products;
 use app\engine\{Db, Autoload};
+include "../config/config.php";
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 

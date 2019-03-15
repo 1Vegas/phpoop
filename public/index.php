@@ -33,12 +33,17 @@
 
 include "../engine/Autoload.php";
 use app\model\Products;
-use app\engine\{Db, Autoload};
+use app\engine\{Autoload};
 include "../config/config.php";
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
-$product1 = new Products(new Db());
+$product1 = new Products(['Lenovo', 'Super Model', 42999.50]);
+
+$product2 = new Products();
+//var_dump($product1);
+
+// $db = new Db();
+// $db->queryAll("SELECT * FROM products");
 
 
-var_dump($product1);

@@ -7,13 +7,11 @@ use app\interfaces\IModel;
 
 abstract class Model implements IModel 
 {    
-    protected $db;
-    //protected $tableName='';
+    protected $db;    
 
     public function __construct() {
         $this->db = Db::getInstance();
-    }
-    
+    }    
 
     public function getOne($id) {
         $tableName = $this->getTableName();
@@ -27,23 +25,10 @@ abstract class Model implements IModel
         return $this->db->queryAll($sql);      
     }
 
-    public function insertProduct($columnNames=[], $values=[]) {
-        $tableName = $this->getTableName();        
-        $sql = "INSERT INTO {$tableName} ($columnNames) VALUES ($values)";        
-    }             
-    
-
-    public function deleteProduct() {
-        $tableName = $this->getTableName();
-        $sql = "SELECT * FROM {$tableName}";  
-        return $this->db->queryAll($sql);                      
-    }
-
-    public function updateProduct() {
-        $tableName = $this->getTableName();
-        $sql = "SELECT * FROM {$tableName}";  
-        return $this->db->queryAll($sql);
-    }
+    // public function insertProduct($columnNames=[], $values=[]) {
+    //     $tableName = $this->getTableName();        
+    //     $sql = "INSERT INTO {$tableName} ($columnNames) VALUES ($values)";        
+    // }
 
     abstract public function getTableName();//в наследнике должен быть реализован такой метод
 }

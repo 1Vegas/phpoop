@@ -9,6 +9,6 @@ class Users extends Model
     protected $tableName = 'users'; 
     
     public function getTableName() {
-        return 'users';
+        return $this->tableName;;
     }
 }

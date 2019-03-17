@@ -7,28 +7,66 @@ use app\interfaces\IModel;
 
 abstract class Model implements IModel 
 {    
+    /**
+     * @var Db
+     */
+    /*
     protected $db;    
 
     public function __construct() {
         $this->db = Db::getInstance();
-    }    
+    }   
+    */ 
 
-    public function getOne($id) {
-        $tableName = $this->getTableName();
+    public static function getOne($id) {
+        $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName} WHERE id = :id";  
-        return $this->db->queryOne($sql, [':id'=>$id]);      
+        return Db::getInstance()->queryObject($sql, ['id'=>$id], static::class);   
     }
 
-    public function getAll() {
-        $tableName = $this->getTableName();
+    public static function getAll() {
+        $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName}";  
-        return $this->db->queryAll($sql);      
+        return Db::getInstance()->queryAll($sql);      
     }
 
-    // public function insertProduct($columnNames=[], $values=[]) {
-    //     $tableName = $this->getTableName();        
-    //     $sql = "INSERT INTO {$tableName} ($columnNames) VALUES ($values)";        
-    // }
+    public function insert() {
+        $params = [];
+        $columns= [];
+        foreach($this as $key => $value) {
+            if($key == "id") continue;
+            $params[":{$key}"] = $value;
+            $columns[] = $key;
+        }
+          
+        $columns = implode(", ", $columns);
+        $values = implode(", ", array_keys($params));
+        $tableName = static::getTableName();
+         
+        $sql = "INSERT INTO {$tableName} ({$columns}) VALUES ({$values})";
+        Db::getInstance()->execute($sql, $params);
+        $this->id = Db::getInstance()->lastInsertId();
+    }
 
-    abstract public function getTableName();//в наследнике должен быть реализован такой метод
+    public function update() {
+        
+    }
+
+    public function delete() {
+        $tableName = static::getTableName();
+        $sql = "DELETE FROM {$tableName} WHERE id = :id";
+        return Db::getInstance()->execute($sql, ['id'=>$this->id]);
+    }
+
+    public function save() {
+        if (is_null($this->id)) 
+            $this->insert();            
+         else 
+            $this->update();
+        
+
+    }
+  
+
+    abstract public static function getTableName();//в наследнике должен быть реализован такой метод
 }

@@ -7,8 +7,15 @@ class Users extends Model
     public $login;
     public $pass;
     protected $tableName = 'users'; 
+
+    public function __construct($id = null, $login = null, $pass = null)
+{
+    $this->id = $id;
+    $this->login = $login;
+    $this->pass = $pass;
+}
     
-    public function getTableName() {
-        return $this->tableName;;
+    public static function getTableName() {
+        return "users";
     }
 }

@@ -32,18 +32,33 @@
 //5й вариант. удалил функцию load. Вызвал метод класса
 
 include "../engine/Autoload.php";
-use app\model\Products;
-use app\engine\{Autoload};
 include "../config/config.php";
+
+use app\model\Products;
+use app\engine\Autoload;
+
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
-$product1 = new Products(['Lenovo', 'Super Model', 42999.50]);
+/** @var Products $product */
 
-$product2 = new Products();
-//var_dump($product1);
+$product = new Products(null, "Хлеб", "Черный", 123);
 
-// $db = new Db();
-// $db->queryAll("SELECT * FROM products");
+$product->save();
+// $product->description = "Белый";
+// $product->update();
+//$product->delete();
+
+
+//$product= Products::getOne(1);
+
+//$product->price = 200;
+
+var_dump($product);
+
+
+
+
+
 
 

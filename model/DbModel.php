@@ -5,7 +5,7 @@ use app\engine\Db;
 
 use app\interfaces\IModel;
 
-abstract class Model implements IModel 
+abstract class DbModel extends Models implements IModel 
 {    
     /**
      * @var Db

@@ -40,11 +40,22 @@ use app\engine\Autoload;
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
-/** @var Products $product */
+$controllername = $_GET['c']?: 'product';
+$actionName = $_GET['a'];
 
-$product = new Products(null, "Хлеб", "Черный", 123);
+$controllerClass = "app\\controllers\\" . ucfirst($controllername) . "Controller";
+//var_dump(controllerClass, $actionName);
+if (class_exists($controllerClass)) {
+    $controller = new $controllerClass();
+    $controller->runAction($actionName);
+}
+//var_dump($controllerClass);
 
-$product->save();
+///** @var Products $product */
+
+//$product = new Products(null, "Хлеб", "Черный", 123);
+
+//$product->save();
 // $product->description = "Белый";
 // $product->update();
 //$product->delete();
@@ -54,7 +65,7 @@ $product->save();
 
 //$product->price = 200;
 
-var_dump($product);
+//var_dump($product);
 
 
 

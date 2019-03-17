@@ -41,7 +41,7 @@ class Db
                 $this->config['login'],
                 $this->config['password']
             );
-              var_dump("Подключаемся к БД");
+              //var_dump("Подключаемся к БД");
               $this->connection->setAttribute(
                 \PDO::ATTR_DEFAULT_FETCH_MODE,
                  \PDO::FETCH_ASSOC);

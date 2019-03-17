@@ -6,7 +6,7 @@ trait Tsingletone
 {
 
 private function __construct() {
-        var_dump($this->getConnection());
+        //var_dump($this->getConnection());
     }       
 
     private static $instance = null;

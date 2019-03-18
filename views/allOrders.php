@@ -3,7 +3,7 @@
 ?>
 
 <h2>Наименование:<?=$order->product?></h2>
-<p>Артикул:<?=$order->description?></p>
+<p>Артикул:<?=$order->product_id?></p>
 <p>Цена:<?=$order->price?></p>
 <p>Количество:<?=$order->quantity?></p>
 <p>Имя:<?=$order->f_name?></p>
@@ -13,5 +13,3 @@
 <p>Электронная почта:<?=$order->email?></p>
 <p>Дата заказа:<?=$order->date?></p>
 <p>Время заказа:<?=$order->time?></p>
-
-

@@ -44,7 +44,7 @@ $controllername = $_GET['c']?: 'product';
 $actionName = $_GET['a'];
 
 $controllerClass = "app\\controllers\\" . ucfirst($controllername) . "Controller";
-//var_dump(controllerClass, $actionName);
+var_dump($controllerClass, $actionName);
 if (class_exists($controllerClass)) {
     $controller = new $controllerClass();
     $controller->runAction($actionName);

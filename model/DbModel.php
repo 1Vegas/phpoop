@@ -60,7 +60,7 @@ abstract class DbModel extends Models implements IModel
                    
         }    
         $thirdArray= array_combine ($columns, $params);
-        var_dump($thirdArray);
+        //var_dump($thirdArray);
         $stringThirdArray = implode(", ", $columns);  
         
         // $columns = implode(", ", $columns);
@@ -71,7 +71,7 @@ abstract class DbModel extends Models implements IModel
         
                 
         $sql = "UPDATE {$tableName} SET ({$stringThirdArray}) WHERE id = :id";
-        var_dump($sql);
+        //var_dump($sql);
         Db::getInstance()->execute($sql, ['id'=>$this->id]);
         $this->id = Db::getInstance()->lastInsertId();
         

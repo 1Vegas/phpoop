@@ -17,7 +17,8 @@ class Orders extends DbModel
     public $date;
     public $time;
     
-    public function __construct($id=null, $product=null, $product_id=null, $price=null, $quantity=null,$f_name = null, $s_name = null, $address=null,
+    public function __construct($id=null, $product=null, $product_id=null, $price=null, 
+    $quantity=null,$f_name = null, $s_name = null, $address=null,
     $post_index=null, $email = null, $date = null, $time = null )
     {
         //parent::__construct();

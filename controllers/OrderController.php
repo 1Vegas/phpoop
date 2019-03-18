@@ -14,8 +14,7 @@ class OrderController  extends Controller
 
     public function actionCard() {
         $id = (int)$_GET['id'];
-        $order = Orders::getOne($id);
-        //var_dump("это ордер", $order);        
+        $order = Orders::getOne($id);                
         echo $this->render("allOrders", ['order' => $order]);
     }     
 }

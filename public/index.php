@@ -53,11 +53,13 @@ if (class_exists($controllerClass)) {
 
 ///** @var Products $product */
 
-//$product = new Products(null, "Хлеб", "Черный", 123);
+$product = new Products(null, "Хлеб", "Вонючий", 300);
+//$product = Products::getOne(14);
 
 //$product->save();
 // $product->description = "Белый";
-// $product->update();
+$product->update();
+//$product->insert();
 //$product->delete();
 
 

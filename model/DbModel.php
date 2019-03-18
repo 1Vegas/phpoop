@@ -48,9 +48,35 @@ abstract class DbModel extends Models implements IModel
         $this->id = Db::getInstance()->lastInsertId();
     }
 
-    public function update() {
+    public function update() { 
+         $params = [];
+         $columns= [];
+         $thirdArray=[];
+        foreach($this as $key => $value) {
+
+            //if($key == "id") continue; //игнорируем поле "id" в БД 
+             $params[":{$key}"] = $value;
+             $columns[] = $key;
+                   
+        }    
+        $thirdArray= array_combine ($columns, $params);
+        var_dump($thirdArray);
+        $stringThirdArray = implode(", ", $columns);  
+        
+        // $columns = implode(", ", $columns);
+        // $values = implode(", ", array_keys($params));
+        // var_dump($values, $columns);
+        $tableName = static::getTableName();
+        
+        
+                
+        $sql = "UPDATE {$tableName} SET ({$stringThirdArray}) WHERE id = :id";
+        var_dump($sql);
+        Db::getInstance()->execute($sql, ['id'=>$this->id]);
+        $this->id = Db::getInstance()->lastInsertId();
         
     }
+    
 
     public function delete() {
         $tableName = static::getTableName();

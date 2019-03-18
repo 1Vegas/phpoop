@@ -1,7 +1,7 @@
 <?php
 namespace app\controllers;
 
-use app\model\Products;
+use app\model\Orders;
 
 // отвечает за маршрутизацию адресной строки
 class OrdersController  extends Controller
@@ -15,6 +15,6 @@ class OrdersController  extends Controller
     public function actionCard() {
         $id = (int)$_GET['id'];
         $order = Orders::getOne($id);
-        echo $this->render("card", ['order' => $order]);
+        echo $this->render("allOrders", ['order' => $order]);
     }     
 }

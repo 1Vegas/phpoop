@@ -49,38 +49,30 @@ abstract class DbModel extends Models implements IModel
     }
 
     public function update() { 
-         $params = [];
-         $columns= [];
-         $thirdArray=[];
-        foreach($this as $key => $value) {
-
-            //if($key == "id") continue; //игнорируем поле "id" в БД 
-             $params[":{$key}"] = $value;
-             $columns[] = $key;
-                   
-        }    
-        $thirdArray= array_combine ($columns, $params);
-        //var_dump($thirdArray);
-        $stringThirdArray = implode(", ", $columns);  
-        
-        // $columns = implode(", ", $columns);
-        // $values = implode(", ", array_keys($params));
-        // var_dump($values, $columns);
         $tableName = static::getTableName();
-        
-        
-                
-        $sql = "UPDATE {$tableName} SET ({$stringThirdArray}) WHERE id = :id";
-        //var_dump($sql);
-        Db::getInstance()->execute($sql, ['id'=>$this->id]);
-        $this->id = Db::getInstance()->lastInsertId();
+        $params = [];
+        $columns = [];
+        foreach ($this as $key => $value) {
+            if ($key == "id") continue;
+            $params[":{$key}"] = $value;
+            $columns["{$key}"] = $value;
+        }
+        $columns = implode(', ', array_map(
+            function ($v, $k) { return sprintf("%s = '%s'", $k, $v); },
+            $columns,
+            array_keys($columns)
+        ));
+
+        $sql = "UPDATE `{$tableName}` SET  {$columns} WHERE id={$this->id}";
+
+        Db::getInstance()->execute($sql, $params);     
         
     }
     
 
     public function delete() {
         $tableName = static::getTableName();
-        $sql = "DELETE FROM {$tableName} WHERE id = :id";
+        $sql = "DELETE FROM `{$tableName}` WHERE id = :id";
         return Db::getInstance()->execute($sql, ['id'=>$this->id]);
     }
 

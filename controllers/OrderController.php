@@ -8,8 +8,8 @@ class OrderController  extends Controller
 {    
 
     public function actionIndex() {
-        $catalog = Orders::getAll();
-        echo $this->render("catalog",['catalog' => $catalog]);
+        $catalogOrders = Orders::getAll();
+        echo $this->render("catalogOrders",['catalogOrders' => $catalogOrders]);
     }
 
     public function actionCard() {

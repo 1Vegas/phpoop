@@ -40,7 +40,7 @@ use app\engine\Autoload;
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
-$controllername = $_GET['c']?: 'product';
+$controllername = $_GET['c']?: 'order';
 $actionName = $_GET['a'];
 
 $controllerClass = "app\\controllers\\" . ucfirst($controllername) . "Controller";
@@ -53,7 +53,7 @@ if (class_exists($controllerClass)) {
 
 ///** @var Products $product */
 
-//$product = new Products(14, "Хлеб", "Зерновой", 500);
+//$product = new Products(null, "Хлеб", "Кефирный", 50);
 //$product = Products::getOne(14);
 
 //$product->save();

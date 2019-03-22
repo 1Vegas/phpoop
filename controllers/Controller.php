@@ -1,13 +1,20 @@
 <?php
 
 namespace app\controllers;
+use app\engine\Render;
+use app\interfaces\IRenderer;
 
-class Controller 
+class Controller implements IRenderer
 {
     private $action;
     private $defaultAction = "index";
     private $layout = 'main';
     private $useLayout =  true;
+    private $renderer;
+
+    public function __construct(IRenderer $renderer) {
+        $this->renderer = $renderer;
+    }
 
     public function runAction($action = null) {
         $this->action = $action?: $this->defaultAction;
@@ -35,12 +42,6 @@ class Controller
     }
 
     public function renderTemplate($template, $params = []) {
-        ob_start();
-        extract($params);
-
-        $templatePath = TEMPLATE_DIR . $template. ".php";
-
-        include $templatePath;
-        return ob_get_clean();
+        return $this->renderer->renderTemplate($template, $params);
     }
 }

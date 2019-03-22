@@ -1,77 +1,63 @@
 <?php
 
-//1й вариант функции autoload - без движка
-// function loadClass($className) {
-//     include_once "../model/{$className}.php";     
-// }
-
-//2й вариант функции autoload (с движком)
-//  include "../engine/Autoload.php";
- 
-//  function __autoload($className) {
-//     $load = new Autoload();
-//     $load->loadClass($className);
-// }
-
-//3й вариант небольшой апдейт функции autoload (с движком)
-// include "../engine/Autoload.php";
- 
-// function __autoload($className) {
-//    (new Autoload())->loadClass($className);   
-// }
-
-//4 вариант. Новый вариант автозагрузчика, который решает конфликты
-// include "../engine/Autoload.php";
-
-// spl_autoload_register('load');
- 
-// function load($className) {
-//    (new Autoload())->loadClass($className);   
-// }
-
-//5й вариант. удалил функцию load. Вызвал метод класса
-
 include "../engine/Autoload.php";
 include "../config/config.php";
 
-use app\model\Products;
+use app\model\Products2;
 use app\engine\Autoload;
-
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
-$controllername = $_GET['c']?: 'order';
-$actionName = $_GET['a'];
+//$templ = $twig->loadTemplate('products.tmpl');
+//echo $templ->render(array());
 
-$controllerClass = "app\\controllers\\" . ucfirst($controllername) . "Controller";
-var_dump($controllerClass, $actionName);
-if (class_exists($controllerClass)) {
-    $controller = new $controllerClass();
-    $controller->runAction($actionName);
-}
-//var_dump($controllerClass);
-
-///** @var Products $product */
-
-//$product = new Products(null, "Хлеб", "Кефирный", 50);
-//$product = Products::getOne(14);
-
-//$product->save();
-// $product->description = "Белый";
-//$product->update();
-//$product->insert();
-//$product->delete();
-
-
-//$product= Products::getOne(1);
-
-//$product->price = 200;
-
+//$product = new Products2();
+$product = Products2::getAll();
 //var_dump($product);
 
+// $mass = [];
+// $mass2 = array('arr1', 'arr2', 'arr3', 'arr4', 'arr5', 'arr6');
+// foreach ($product as $key => $value) {
+//     $key = 'arr'. $key;
+//     $mass= array_fill_keys($mass2,$value);    
+// }
+$templ = $twig->loadTemplate('products.tmpl');
+echo $templ->render(array('product'=>$product));
+//var_dump($mass);
 
 
+//echo $product[1]['title'];
 
 
+//echo $twig->render('products.tmpl', $mass
+    
+// [
+//         arr1=>['image' => 'img_products/muhomorred.jpg',
+//         'title' => 'Мухомор красный',
+//          'description' => 'Плодовое тело гриба содержит ряд токсичных соединений, некоторые из которых обладают психотропным эффектом. Токсические и психоактивные вещества хорошо растворяются в горячей воде, и употребление грибов, отваренных в нескольких водах, приводит к менее сильному отравлению. Однако, содержание ядов в плодовых телах может сильно варьировать, что делает употребление мухоморов в пищу опасным',
+//         'price' => '50.50'],
+//         arr2=>['image' => 'img_products/muhomorpanther.jpg',
+//         'description' => 'Сильно ядовит. Образует микоризу со многими деревьями, встречается в хвойных, смешанных и широколиственных лесах, часто под сосной, дубом, буком, предпочитает щелочные почвы. Широко распространён в умеренном климате Северного полушария',
+//         'title' => 'Мухомор пантерный', 
+//         'price' => '39.50'],
+//         arr3=>['image' => 'img_products/white.jpg',
+//         'description' => 'Классический вид, который в народе прозвали «полковником» – чествуя самым главным и лучшим из сородичей. Каштаново-коричневая шляпка выпуклая, затем плоско-выпуклая, подушковидная, редко распростертая, достигает диаметра 25–30 см. Известны гигантские представители – с диаметром шляпки до 45 см и весом до 2–3 кг. Поверхность гладкая, иногда неровная, бороздчатая ил',
+//         'title' => 'Белый гриб', 
+//         'price' => '40.50'],
+//         arr4=>['image' => 'img_products/podosinovik.jpg',
+//         'description' => 'Плодоносит чаще поодиночке. Обычный гриб в северной умеренной зоне, в России наиболее известен в Европейской части и на Дальнем Востоке, где встречается под берёзой маньчжурской и каменной. Сезон июнь — сентябрь, иногда до поздней осени. Съедобен',
+//         'title' => 'Подосиновик', 
+//         'price' => '41.50'],
+//         arr5=>['image' => 'img_products/lisichka.jpg',
+//         'description' => 'Хорошо известный съедобный гриб, высоко ценится, годится для употребления в любом виде. Образует микоризу с различными деревьями, наиболее часто с елью, сосной, дубом, буком',
+//         'title' => 'Лисичка', 
+//         'price' => '38.50'],
+//         arr6=>['image' => 'img_products/svinushka.jpg',
+//         'description' => 'До 1981 года этот гриб считался условно съедобным и относился к 4-й категории по пищевым качествам. В настоящее время отнесён к ядовитым, хотя симптомы отравления проявляются не всегда и/или не сразу. Содержит токсины (лектины), не разрушающиеся даже при многократном отваривании',
+//         'title' => 'Свинушка', 
+//         'price' => '10.50']       
+        
+//     ]
 
+//);
 

@@ -21,6 +21,11 @@ class Products extends DbModel
         $this->image = $image;
         $this->category = $category;
     }
+
+    public function __call($closure, $args)
+    {
+        return call_user_func_array($this->{$closure}, $args);
+    }
     
     public static function getTableName() {
         return "products2";

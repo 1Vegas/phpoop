@@ -3,6 +3,7 @@
 namespace app\controllers;
 use app\engine\Render;
 use app\interfaces\IRenderer;
+use app\model\Basket;
 
 class Controller implements IRenderer
 {
@@ -32,7 +33,10 @@ class Controller implements IRenderer
         if ($this->useLayout) {
             return $this->renderTemplate(
                 "layouts/{$this->layout}", 
-                ['content'=>$this->renderTemplate($template, $params)]
+                [
+                    'content'=>$this->renderTemplate($template, $params),
+                    'count' => Basket::getCountWhere('session_id', session_id())
+                ]
             );
 
         } else {

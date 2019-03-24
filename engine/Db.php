@@ -66,11 +66,17 @@ class Db
         $pdoStatement->execute($params);
         return $pdoStatement;
     }
+    
+
     //функция возвращающая объект
     public function queryObject($sql, $params, $class) {
         $pdoStatement = $this->query($sql, $params);
         $pdoStatement->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $class);
-        return $pdoStatement->fetch();
+        $obj= $pdoStatement->fetch();
+        $obj->info = function($name) {
+            echo "hello $name";
+        };
+        return $obj;
 
     }
 
@@ -98,5 +104,5 @@ class Db
     public function lastInsertId() {
         return $this->connection->lastInsertId();
     }
-
+    
 }

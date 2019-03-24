@@ -5,8 +5,11 @@
             <a href="?c=product&a=card&id={{ item.id }}">
                 <img src="img_products/{{item.image}}" alt="{{item.title}}">                
             </a>
-            <div class="label">{{item.title}} ({{item.price}} руб.)</div>  
-            <button type="submit">Добавить в корзину</button> 
+            <div class="label">{{item.title}} ({{item.price}} руб.)</div> 
+            <form action="product"> 
+            <input hidden type="text" name="id" value="{{item.id}}">
+            <input type="submit" name="action" value="Купить"> 
+            </form>
         </div>
         {%endfor%}        
     </div>

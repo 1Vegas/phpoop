@@ -30,6 +30,7 @@
 // }
 
 //5й вариант. удалил функцию load. Вызвал метод класса
+session_start();
 
 include "../engine/Autoload.php";
 require_once '../vendor/autoload.php';
@@ -39,13 +40,24 @@ use app\model\Products;
 use app\engine\Autoload;
 use app\engine\Render;
 use app\engine\TwigRenderer;
+use app\engine\Request;
 
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
-// $controllername = $_GET['c']?: 'order';
+$request = new Request();
+
+// $product = Products::getOne(1)->info("wow");
+// var_dump($product);
+
+
+
+$controllername = $_GET['c']?: 'order';
 $controllername = $_GET['c']?: 'product';
 $actionName = $_GET['a'];
+// $controllername = $request->getControllerName()?: 'product';
+// $actionName = $request->getActionName();
+
 
 $controllerClass = "app\\controllers\\" . ucfirst($controllername) . "Controller";
 //var_dump($controllerClass, $actionName);

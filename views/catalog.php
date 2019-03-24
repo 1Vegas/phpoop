@@ -1,9 +1,16 @@
-<?php
-foreach ($catalog as $item):?>
-
-<a href="?c=product&a=card&id=<?=$item['id']?>">
-<h2><?=$item['name']?></h2></a>
-<p><?=$item['description']?></p>
-<p>Стоимость: <?=$item['price']?></p>
-<hr>
-<?endforeach;?>
+  
+    <div class="main">
+    <?php
+        foreach ($catalog as $item):?>
+        <div class="card">        
+            <a href="product/card/id=<?=item[id]?> ">
+                <img src="img_products/<?=item[image]?>" alt="<?=item[title]?>">                
+            </a>
+            <div class="label"><?=item[title]?> (<?=item[price]?> руб.)</div> 
+            <form action="product/addBasket" method ="get"> 
+            <input hidden type="text" name="id" value="<?=item[id]?>">
+            <input type="submit" name="action" value="Купить"> 
+            </form>
+        </div>
+        <?endforeach;?>        
+    </div>

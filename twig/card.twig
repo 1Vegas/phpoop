@@ -1,7 +1,11 @@
 <div class="product-card"> 
+    <a href="index.php">Вернуться на главную</a>
     <h2>{{product.title}} ({{product.price}} руб.)</h2>
     <div class="descr">{{product.description}}</div>
-    <img width="300" src="img_products/{{product.image}}" alt="Фото">
-    <button type="submit">Добавить в корзину</button>
+    <img width="300" src="img_products/{{product.image}}" alt="{{product.title}}">
+    <form> 
+        <input hidden type="text" name="id" value="{{product.id}}">
+        <input type="submit" name="action" value="Купить"> 
+    </form>
        
 </div>

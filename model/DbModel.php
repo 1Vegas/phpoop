@@ -18,6 +18,8 @@ abstract class DbModel extends Models implements IModel
     }   
     */ 
 
+   
+
     public static function getOne($id) {
         $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName} WHERE id = :id";  
@@ -29,6 +31,13 @@ abstract class DbModel extends Models implements IModel
         $sql = "SELECT * FROM {$tableName}";  
         return Db::getInstance()->queryAll($sql);      
     }
+
+    public static function getCountWhere($field, $value) {
+        $tableName = static::getTableName();
+        $sql = "SELECT count(*) as count FROM {$tableName} WHERE `$field`=$field";        
+            return Db::getInstance()->queryOne($sql,["$field"=>$value])['count'];
+        }
+
 
     public function insert() {
         $params = [];
